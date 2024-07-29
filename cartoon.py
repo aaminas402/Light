@@ -1,4 +1,6 @@
 import json
+import os
+import asyncio
 from generate_panels import generate_panels
 from stability_ai import text_to_image
 from add_text import add_text_to_panel
@@ -6,11 +8,14 @@ from create_strip import create_strip
 
 STYLE = "american comic, colored"
 
-def main(scenario):
-    panels = generate_panels(scenario)
+async def main(scenario):
+    panels = await generate_panels(scenario)
+
+    # Ensure the output directory exists
+    os.makedirs('output', exist_ok=True)
 
     with open('output/panels.json', 'w') as outfile:
-        json.dump(panels, outfile)
+        json.dump(panels, outfile, indent=4)
 
     panel_images = []
 
@@ -26,4 +31,4 @@ def main(scenario):
 
 if __name__ == "__main__":
     scenario = input("Enter the scenario: ")
-    main(scenario)
+    asyncio.run(main(scenario))
