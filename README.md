@@ -1,2 +1,2 @@
 # Light
-An ai comic generator to remember chemical reactions
+An ai comic generator to remember chemical reactions.
